@@ -1,0 +1,12 @@
+package com.tarotplatform.enums;
+
+public enum NotificationType {
+    BOOKING_CONFIRMED,
+    PAYMENT_SUCCESS,
+    SESSION_REMINDER,
+    SESSION_STARTING,
+    BOOKING_CANCELLED,
+    BOOKING_RESCHEDULED,
+    NEW_MESSAGE,
+    READING_COMPLETED
+}

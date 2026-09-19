@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "name": "🔮 Frontend (Flutter App)",
+      "path": "frontend"
+    },
+    {
+      "name": "⚡ Backend (Spring Boot 3)",
+      "path": "backend"
+    }
+  ],
+  "settings": {
+    "editor.tabSize": 2
+  }
+}

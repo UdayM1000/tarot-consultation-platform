@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  tarot-mysql:
+    image: mysql:8.4
+    container_name: tarot-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: tarot_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - tarot_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  tarot-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tarot-backend
+    restart: unless-stopped
+    depends_on:
+      tarot-mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_URL: jdbc:mysql://tarot-mysql:3306/tarot_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      JWT_SECRET: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    ports:
+      - "8080:8080"
+
+volumes:
+  tarot_mysql_data:
