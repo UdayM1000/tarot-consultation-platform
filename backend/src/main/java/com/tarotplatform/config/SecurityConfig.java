@@ -52,6 +52,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Public documentation & monitoring
                         .requestMatchers(
+                                "/",
+                                "/error",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
