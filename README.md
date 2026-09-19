@@ -5,7 +5,8 @@
 [![Backend](https://img.shields.io/badge/Backend-Spring%20Boot%203.3-6DB33F?logo=springboot&logoColor=white)](backend)
 [![Java](https://img.shields.io/badge/Java-21%20LTS-ED8B00?logo=openjdk&logoColor=white)](backend)
 [![Frontend](https://img.shields.io/badge/Frontend-Flutter%203.47-02569B?logo=flutter&logoColor=white)](frontend)
-[![Database](https://img.shields.io/badge/Database-MySQL%208.0-4479A1?logo=mysql&logoColor=white)](backend)
+[![Database](https://img.shields.io/badge/Database-Aiven%20MySQL%208.0-4479A1?logo=mysql&logoColor=white)](https://aiven.io)
+[![Live Backend](https://img.shields.io/badge/Render-Backend%20Live%20ONLINE-46E3B7?logo=render&logoColor=white)](https://tarot-consultation-platform.onrender.com)
 [![Tests](https://img.shields.io/badge/Tests-137%20Passed%20(100%25)-brightgreen)](.)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -170,9 +171,12 @@ cd frontend && flutter test
 
 ## 🌐 Deployment
 
-* **Backend**: Ready to deploy on **Render** using the included `backend/Dockerfile`.
-* **Frontend**: Ready to deploy on **Vercel** (`flutter build web --release`).
-* **Database**: Ready for **Aiven for MySQL**, **Railway**, or AWS RDS.
+* **Backend (Live)**: Deployed on **Render** at [https://tarot-consultation-platform.onrender.com](https://tarot-consultation-platform.onrender.com)
+  * Health check: `GET /actuator/health`
+  * Status: `GET /`
+  * Swagger UI: [https://tarot-consultation-platform.onrender.com/swagger-ui/index.html](https://tarot-consultation-platform.onrender.com/swagger-ui/index.html)
+* **Database (Live)**: Hosted on **Aiven for MySQL 8.0** with TLS/SSL encryption and automated Flyway migrations.
+* **Frontend**: Configured for **Vercel** deployment with built-in SPA routing (`vercel.json`) and zero CORS issues.
 
 ---
 
