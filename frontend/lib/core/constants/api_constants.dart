@@ -4,15 +4,33 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 class ApiConstants {
   ApiConstants._();
 
-  /// Automatically adapts localhost for Android emulators (10.0.2.2) vs Web / iOS (localhost)
+  /// Live production backend deployed on Render
+  static const String liveProductionUrl = 'https://tarot-consultation-platform.onrender.com';
+
+  /// Compile-time environment variable override
+  /// Override at build time via: --dart-define=API_BASE_URL=... or --dart-define-from-file=.env
+  static const String configuredBaseUrl = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: liveProductionUrl,
+  );
+
+  /// Automatically resolves base URL: defaults to live Render backend or uses compile-time override
   static String get defaultBaseUrl {
-    if (kIsWeb) {
-      return 'http://localhost:8080';
+    if (configuredBaseUrl.isNotEmpty) {
+      return configuredBaseUrl;
     }
-    if (Platform.isAndroid) {
-      return 'http://10.0.2.2:8080';
+    return liveProductionUrl;
+  }
+
+  /// WebSocket URL for STOMP chat
+  static String get defaultWsUrl {
+    final httpUrl = defaultBaseUrl;
+    if (httpUrl.startsWith('https://')) {
+      return httpUrl.replaceFirst('https://', 'wss://') + '/ws/chat';
+    } else if (httpUrl.startsWith('http://')) {
+      return httpUrl.replaceFirst('http://', 'ws://') + '/ws/chat';
     }
-    return 'http://localhost:8080';
+    return 'wss://tarot-consultation-platform.onrender.com/ws/chat';
   }
 
   static const Duration connectTimeout = Duration(seconds: 15);

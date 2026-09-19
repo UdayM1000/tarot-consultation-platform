@@ -37,6 +37,9 @@ frontend/android/local.properties
 
 # Secrets & Environment
 *.env
+!frontend/.env
+!*.env.example
+!*.env.production
 *.key
 *.p12
 *.jks
